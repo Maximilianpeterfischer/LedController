@@ -87,14 +87,14 @@ public class LedControllerTest {
 
         controller.turnOffAllLeds();
 
-        verify(apiService).setLight(20, "#000000", false);
-        verify(apiService).setLight(21, "#000000", false);
-        verify(apiService).setLight(22, "#000000", false);
-        verify(apiService).setLight(23, "#000000", false);
-        verify(apiService).setLight(24, "#000000", false);
-        verify(apiService).setLight(25, "#000000", false);
-        verify(apiService).setLight(26, "#000000", false);
-        verify(apiService).setLight(27, "#000000", false);
+        verify(apiService).setLight(46, "#000000", false);
+        verify(apiService).setLight(47, "#000000", false);
+        verify(apiService).setLight(48, "#000000", false);
+        verify(apiService).setLight(49, "#000000", false);
+        verify(apiService).setLight(50, "#000000", false);
+        verify(apiService).setLight(51, "#000000", false);
+        verify(apiService).setLight(52, "#000000", false);
+        verify(apiService).setLight(53, "#000000", false);
         verify(apiService, times(8)).setLight(anyInt(), eq("#000000"), eq(false));
         verifyNoMoreInteractions(apiService);
     }
@@ -111,18 +111,18 @@ public class LedControllerTest {
 
         InOrder inOrder = inOrder(apiService, sleeper);
 
-        inOrder.verify(apiService).setLight(20, "#000000", false);
-        inOrder.verify(apiService).setLight(21, "#000000", false);
-        inOrder.verify(apiService).setLight(22, "#000000", false);
-        inOrder.verify(apiService).setLight(23, "#000000", false);
-        inOrder.verify(apiService).setLight(24, "#000000", false);
-        inOrder.verify(apiService).setLight(25, "#000000", false);
-        inOrder.verify(apiService).setLight(26, "#000000", false);
-        inOrder.verify(apiService).setLight(27, "#000000", false);
+        inOrder.verify(apiService).setLight(46, "#000000", false);
+        inOrder.verify(apiService).setLight(47, "#000000", false);
+        inOrder.verify(apiService).setLight(48, "#000000", false);
+        inOrder.verify(apiService).setLight(49, "#000000", false);
+        inOrder.verify(apiService).setLight(50, "#000000", false);
+        inOrder.verify(apiService).setLight(51, "#000000", false);
+        inOrder.verify(apiService).setLight(52, "#000000", false);
+        inOrder.verify(apiService).setLight(53, "#000000", false);
 
-        inOrder.verify(apiService).setLight(20, "#ff0000", true);
+        inOrder.verify(apiService).setLight(46, "#ff0000", true);
 
-        int[] ids = {20, 21, 22, 23, 24, 25, 26, 27};
+        int[] ids = {46, 47, 48, 49, 50, 51, 52, 53};
         for (int i = 0; i < ids.length - 1; i++) {
             inOrder.verify(sleeper).sleep(5L);
             inOrder.verify(apiService).setLight(ids[i], "#000000", false);
@@ -130,25 +130,25 @@ public class LedControllerTest {
         }
 
         inOrder.verify(sleeper).sleep(5L);
-        inOrder.verify(apiService).setLight(27, "#000000", false);
+        inOrder.verify(apiService).setLight(53, "#000000", false);
 
-        inOrder.verify(apiService).setLight(20, "#000000", false);
-        inOrder.verify(apiService).setLight(21, "#000000", false);
-        inOrder.verify(apiService).setLight(22, "#000000", false);
-        inOrder.verify(apiService).setLight(23, "#000000", false);
-        inOrder.verify(apiService).setLight(24, "#000000", false);
-        inOrder.verify(apiService).setLight(25, "#000000", false);
-        inOrder.verify(apiService).setLight(26, "#000000", false);
-        inOrder.verify(apiService).setLight(27, "#000000", false);
+        inOrder.verify(apiService).setLight(46, "#000000", false);
+        inOrder.verify(apiService).setLight(47, "#000000", false);
+        inOrder.verify(apiService).setLight(48, "#000000", false);
+        inOrder.verify(apiService).setLight(49, "#000000", false);
+        inOrder.verify(apiService).setLight(50, "#000000", false);
+        inOrder.verify(apiService).setLight(51, "#000000", false);
+        inOrder.verify(apiService).setLight(52, "#000000", false);
+        inOrder.verify(apiService).setLight(53, "#000000", false);
 
-        verify(apiService, times(1)).setLight(20, "#ff0000", true);
-        verify(apiService, times(1)).setLight(21, "#ff0000", true);
-        verify(apiService, times(1)).setLight(22, "#ff0000", true);
-        verify(apiService, times(1)).setLight(23, "#ff0000", true);
-        verify(apiService, times(1)).setLight(24, "#ff0000", true);
-        verify(apiService, times(1)).setLight(25, "#ff0000", true);
-        verify(apiService, times(1)).setLight(26, "#ff0000", true);
-        verify(apiService, times(1)).setLight(27, "#ff0000", true);
+        verify(apiService, times(1)).setLight(46, "#ff0000", true);
+        verify(apiService, times(1)).setLight(47, "#ff0000", true);
+        verify(apiService, times(1)).setLight(48, "#ff0000", true);
+        verify(apiService, times(1)).setLight(49, "#ff0000", true);
+        verify(apiService, times(1)).setLight(50, "#ff0000", true);
+        verify(apiService, times(1)).setLight(51, "#ff0000", true);
+        verify(apiService, times(1)).setLight(52, "#ff0000", true);
+        verify(apiService, times(1)).setLight(53, "#ff0000", true);
         verify(sleeper, times(8)).sleep(5L);
         verifyNoMoreInteractions(apiService, sleeper);
     }
@@ -163,14 +163,14 @@ public class LedControllerTest {
 
         controller.spinningLed("#00ff00", 0, 10L);
 
-        verify(apiService).setLight(20, "#000000", false);
-        verify(apiService).setLight(21, "#000000", false);
-        verify(apiService).setLight(22, "#000000", false);
-        verify(apiService).setLight(23, "#000000", false);
-        verify(apiService).setLight(24, "#000000", false);
-        verify(apiService).setLight(25, "#000000", false);
-        verify(apiService).setLight(26, "#000000", false);
-        verify(apiService).setLight(27, "#000000", false);
+        verify(apiService).setLight(46, "#000000", false);
+        verify(apiService).setLight(47, "#000000", false);
+        verify(apiService).setLight(48, "#000000", false);
+        verify(apiService).setLight(49, "#000000", false);
+        verify(apiService).setLight(50, "#000000", false);
+        verify(apiService).setLight(51, "#000000", false);
+        verify(apiService).setLight(52, "#000000", false);
+        verify(apiService).setLight(53, "#000000", false);
         verify(apiService, never()).setLight(anyInt(), eq("#00ff00"), eq(true));
         verifyNoMoreInteractions(apiService);
         verifyNoMoreInteractions(sleeper);
@@ -198,7 +198,7 @@ public class LedControllerTest {
 
         // Gruppe simulieren: LED IDs 20–27
         JSONArray lights = new JSONArray();
-        for (int id = 20; id <= 27; id++) {
+        for (int id = 46; id <= 53; id++) {
             lights.put(new JSONObject()
                     .put("id", id)
                     .put("color", "#000")
@@ -217,9 +217,9 @@ public class LedControllerTest {
         int minuteIndex = controller.mapToIndex(0, 60, ledCount);      // 0
         int secondIndex = controller.mapToIndex(0, 60, ledCount);      // 0
 
-        int hourId   = 20 + hourIndex;
-        int minuteId = 20 + minuteIndex;
-        int secondId = 20 + secondIndex;
+        int hourId   = 46 + hourIndex;
+        int minuteId = 46 + minuteIndex;
+        int secondId = 46 + secondIndex;
 
         // Erwartete Farben:
         // Minuten + Sekunden auf derselben LED → Grün + Blau = Cyan
@@ -237,7 +237,7 @@ public class LedControllerTest {
 
         // Gruppe simulieren
         JSONArray lights = new JSONArray();
-        for (int id = 20; id <= 27; id++) {
+        for (int id = 46; id <= 53; id++) {
             lights.put(new JSONObject()
                     .put("id", id)
                     .put("color", "#000")
@@ -249,7 +249,7 @@ public class LedControllerTest {
         controller.showTime(0, 0, 0);  // H=M=S=0
 
         // LED 20 ist Index 0
-        verify(apiService).setLight(20, "#ffffff", true);
+        verify(apiService).setLight(46, "#ffffff", true);
         verify(apiService, times(8)).setLight(anyInt(), anyString(), anyBoolean());
     }
 
