@@ -26,4 +26,6 @@ public interface LedController {
 
 
     void spinningLed(String color, int turns, long sleepMillis) throws IOException, InterruptedException;
+
+    void spinningWheel(int steps) throws IOException;
 }

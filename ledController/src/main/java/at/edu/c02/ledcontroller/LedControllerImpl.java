@@ -110,4 +110,9 @@ public class LedControllerImpl implements LedController {
 
         turnOffAllLeds();
     }
+
+    @Override
+    public void spinningWheel(int steps) throws IOException {
+
+    }
 }
