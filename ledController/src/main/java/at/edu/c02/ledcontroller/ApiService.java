@@ -12,4 +12,8 @@ public interface ApiService {
 
     // NEU: LED setzen
     JSONObject setLight(int id, String color, boolean state) throws IOException;
+
+    // NEU: LED löschen
+    void deleteLight(int id) throws IOException;
 }
+
