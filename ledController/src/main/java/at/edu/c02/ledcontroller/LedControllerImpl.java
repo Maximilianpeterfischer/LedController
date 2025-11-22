@@ -110,4 +110,53 @@ public class LedControllerImpl implements LedController {
 
         turnOffAllLeds();
     }
+
+    @Override
+    public void spinningWheel(int steps, long sleepMillis) throws IOException, InterruptedException
+    {
+        if (steps <= 0) {
+            return;
+        }
+
+        JSONObject response = apiService.getLights();
+        JSONArray lights = response.getJSONArray("lights");
+
+        String[] colors = new String[GROUP_LED_IDS.length];
+        boolean[] states = new boolean[GROUP_LED_IDS.length];
+
+        for (int i = 0; i < GROUP_LED_IDS.length; i++) {
+            JSONObject light = findLight(lights, GROUP_LED_IDS[i]);
+            colors[i] = light.getString("color");
+            states[i] = light.getBoolean("on");
+        }
+
+        for (int step = 0; step < steps; step++) {
+            String lastColor = colors[colors.length - 1];
+            boolean lastState = states[states.length - 1];
+            for (int i = colors.length - 1; i > 0; i--) {
+                colors[i] = colors[i - 1];
+                states[i] = states[i - 1];
+            }
+            colors[0] = lastColor;
+            states[0] = lastState;
+
+            for (int i = 0; i < GROUP_LED_IDS.length; i++) {
+                apiService.setLight(GROUP_LED_IDS[i], colors[i], states[i]);
+            }
+
+            if (step < steps - 1) {
+                sleeper.sleep(sleepMillis);
+            }
+        }
+    }
+
+    private JSONObject findLight(JSONArray lights, int id) {
+        for (int i = 0; i < lights.length(); i++) {
+            JSONObject light = lights.getJSONObject(i);
+            if (light.getInt("id") == id) {
+                return light;
+            }
+        }
+        throw new IllegalArgumentException("No light found for id " + id);
+    }
 }

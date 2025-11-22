@@ -26,4 +26,9 @@ public interface LedController {
 
 
     void spinningLed(String color, int turns, long sleepMillis) throws IOException, InterruptedException;
+
+    /**
+     * Rotates the current group LED states/colors clockwise by the given number of steps.
+     */
+    void spinningWheel(int steps, long sleepMillis) throws IOException, InterruptedException;
 }
