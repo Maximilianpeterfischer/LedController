@@ -1,0 +1,157 @@
+
+Iteration 3 – Sprint-Planning (Epic 3)
+Ziel der Iteration
+
+Umstellung auf sichere Secret-Verwaltung (X-Hasura-Group-ID) und Implementierung des neuen Effekts „Spinning Wheel“ inklusive CLI-Anbindung.
+
+Stories im Sprint
+Story 3.1 – Secrets
+
+Assigned: Benni
+Beschreibung:
+Secret-Datei (secret.txt) einführen, .gitignore erweitern und Group-ID dynamisch einlesen.
+Hardcodierte Group-ID entfernen und ApiServiceImpl auf Secret-basierte Konfiguration umstellen.
+
+Story 3.2 – Spinning Wheel Effekt
+
+Assigned: Janik
+Beschreibung:
+Rotation der Farben aller Gruppen-LEDs im Uhrzeigersinn, basierend auf dem aktuellen LED-Zustand.
+Für jede Iteration LEDs neu setzen und zeitlich verzögert aktualisieren.
+
+Story 3.3 – CLI Command: spinningwheel
+
+Assigned: Valentin
+Beschreibung:
+CLI-Befehl spinningwheel implementieren, Nutzer nach Anzahl der Schritte fragen und den Effekt starten.
+
+Aufgaben / Breakdown
+Story 3.1 Tasks
+
+secret.txt anlegen (Root-Level)
+
+.gitignore aktualisieren
+
+Methode zum Einlesen des Secrets implementieren
+
+Hardcodierte Group-ID ersetzen
+
+Funktionstest aller API-Operationen
+
+Story 3.2 Tasks
+
+Gruppen-LEDs auslesen (Farbzustände)
+
+Rotation der Farbliste implementieren
+
+LEDs pro Schritt aktualisieren (setLight)
+
+Zeitsteuerung mit sleepMillis verwenden
+
+Finales Verhalten prüfen (Visualisierung auf LEDs)
+
+Story 3.3 Tasks
+
+neuen CLI-Befehl registrieren
+
+Benutzerabfrage „How many steps?“
+
+Aufruf von spinningWheel()
+
+Konsolen-Feedback anzeigen
+
+
+
+
+Iteration 3 – Sprint-Retrospektive (Epic 3)
+1. Wie ist der Sprint gelaufen?
+
+Der Sprint verlief sehr erfolgreich. Die Umstellung auf die Secret-basierten Group-IDs funktionierte sofort, und alle API-Calls liefen danach stabil und zuverlässig. Durch die klare Strukturierung der Stories (3.1 → 3.2 → 3.3) war der Ablauf logisch, und die Implementierung konnte ohne technische Probleme durchgeführt werden. Die LEDs der Gruppe G wurden korrekt erkannt, angezeigt und gesteuert, was die Basis für alle Effekte in Epic 3 war.
+
+2. Wurde alles geschafft?
+
+Ja, alle Stories von Epic 3 wurden erfolgreich abgeschlossen:
+
+Story 3.1 – Secrets:
+
+Secret erhalten
+
+secret.txt angelegt
+
+.gitignore angepasst
+
+Hardcodierte Group-ID entfernt
+
+Group-ID korrekt aus Datei eingelesen
+
+API-Calls funktionieren weiterhin
+
+Story 3.2 – Spinning Wheel Effekt:
+
+Farben der Gruppen-LEDs korrekt ausgelesen
+
+Rotation im Uhrzeigersinn implementiert
+
+LEDs werden pro Schritt korrekt aktualisiert
+
+Effekt läuft stabil und sichtbar
+
+Story 3.3 – CLI spinningwheel:
+
+CLI-Dialog implementiert
+
+Eingabe der Anzahl der Schritte funktioniert
+
+Effekt startet wie vorgesehen
+
+Durch die fertige Implementierung leuchten die LEDs nun korrekt und zeigen den Effekt wie erwartet an.
+
+3. Was kann in den nächsten Sprints verbessert werden?
+
+Test-First konsequenter anwenden:
+Bei Story 3.2 war die Logik komplex; ein früheres Test-First-Design hätte einige manuelle Debugging-Schritte reduziert.
+
+Fehlerbehandlung verbessern:
+Beim Lesen des Secrets oder bei fehlerhaften Eingaben in der CLI könnten noch detailliertere Fehlermeldungen ausgegeben werden.
+
+Bessere Strukturierung der Effekt-Logik:
+Die Schleifen für die Rotation waren funktional, könnten aber in Hilfsmethoden ausgelagert werden, um die Lesbarkeit zu erhöhen.
+
+Teamkommunikation:
+Abstimmung über Sequenzen und LED-IDs könnte noch früher stattfinden, um parallele Arbeit zu erleichtern.
+
+Daily Epic 3
+Was wurde seit dem letzten Daily erledigt?
+
+Wir haben das Secret für unsere Gruppe (G) erhalten.
+
+Die Arbeiten an Story 3.1 – Secrets haben begonnen:
+
+Struktur für secret.txt vorbereitet
+
+.gitignore wird aktualisiert
+
+Planung der Einlese-Logik (readGroupId() o.ä.) ist abgeschlossen
+
+Woran arbeiten wir bis zum nächsten Daily?
+
+Fertigstellung von Story 3.1:
+
+Secret aus Datei einlesen
+
+Hardcodierte Group-ID vollständig entfernen
+
+ApiServiceImpl auf Dateibasierte Lösung umstellen
+
+Danach direkt Start von:
+
+Story 3.2 – Spinning Wheel Effekt
+
+Story 3.3 – CLI-Befehl spinningwheel
+
+Gibt es Blocker?
+
+Keine Blocker.
+
+Nach Implementierung von 3.1 kann Epic 3 ohne Einschränkungen fortgesetzt werden.
+

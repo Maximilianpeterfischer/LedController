@@ -82,6 +82,21 @@ public class ApiServiceImpl implements ApiService {
         return readJson(connection);
     }
 
+    @Override
+    public void deleteLight(int id) throws IOException {
+        String groupId = loadSecret();
+
+        URL url = new URL("https://balanced-civet-91.hasura.app/api/rest/lights/" + id);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("DELETE");
+        connection.setRequestProperty("X-Hasura-Group-ID", groupId);
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode < 200 || responseCode >= 300) {
+            throw new IOException("Error: deleteLight failed with response code " + responseCode);
+        }
+    }
+
     private JSONObject readJson(HttpURLConnection connection) throws IOException {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getInputStream())

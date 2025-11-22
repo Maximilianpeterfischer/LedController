@@ -3,6 +3,7 @@ package at.edu.c02.ledcontroller;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import java.io.IOException;
 
 public interface LedController {
@@ -24,6 +25,17 @@ public interface LedController {
      */
     void turnOffAllLeds() throws IOException;
 
-
     void spinningLed(String color, int turns, long sleepMillis) throws IOException, InterruptedException;
+
+    void showTime() throws IOException;
+
+    void showTime(int hours, int minutes, int seconds) throws IOException;
+
+    static String mixColors(boolean hour, boolean minute, boolean second) {
+        int r = hour   ? 0xFF : 0;
+        int g = minute ? 0xFF : 0;
+        int b = second ? 0xFF : 0;
+
+        return String.format("#%02x%02x%02x", r, g, b);
+    }
 }

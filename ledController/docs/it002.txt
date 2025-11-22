@@ -84,39 +84,3 @@ Durch frühere Reviews hätten kleinere strukturelle Verbesserungen direkt im Sp
 
 
 
-
-Daily Epic 3
-Was wurde seit dem letzten Daily erledigt?
-
-Wir haben das Secret für unsere Gruppe (G) erhalten.
-
-Die Arbeiten an Story 3.1 – Secrets haben begonnen:
-
-Struktur für secret.txt vorbereitet
-
-.gitignore wird aktualisiert
-
-Planung der Einlese-Logik (readGroupId() o.ä.) ist abgeschlossen
-
-Woran arbeiten wir bis zum nächsten Daily?
-
-Fertigstellung von Story 3.1:
-
-Secret aus Datei einlesen
-
-Hardcodierte Group-ID vollständig entfernen
-
-ApiServiceImpl auf Dateibasierte Lösung umstellen
-
-Danach direkt Start von:
-
-Story 3.2 – Spinning Wheel Effekt
-
-Story 3.3 – CLI-Befehl spinningwheel
-
-Gibt es Blocker?
-
-Keine Blocker.
-
-Nach Implementierung von 3.1 kann Epic 3 ohne Einschränkungen fortgesetzt werden.
-

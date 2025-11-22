@@ -1,0 +1,89 @@
+Iteration 4 – Sprint-Planning (Epic 4)
+Ziel der Iteration
+
+Implementierung der Uhrzeitanzeige über die LEDs, Erweiterung des API-Service um DELETE-Operationen sowie Ergänzung der Main-CLI um die finalen Befehle (clock und delete). Damit wird das System funktional komplett.
+
+Stories im Sprint
+Story 4.1 – Uhrzeit-Anzeige
+
+Assigned: Valentin
+Beschreibung:
+Der LedController soll die aktuelle Uhrzeit auf den LEDs darstellen.
+Mapping:
+
+Stunden → Rot
+
+Minuten → Grün
+
+Sekunden → Blau
+
+Bei Überlappung: Farben mischen (RGB-Addition)
+
+Runden auf die nächste LED
+
+Für Tests: Uhrzeit als Parameter übergeben (deterministisch).
+
+Story 4.2 – DELETE-API-Call
+
+Assigned: Max
+Beschreibung:
+ApiService um DELETE-Anfragen erweitern (DELETE /lights/:id).
+Error Handling ergänzen und Rückgabe prüfen.
+Keine echten Call-Duplikate → Hilfsmethode für DELETE.
+
+Story 4.3 – CLI-Erweiterungen (clock, delete)
+
+Assigned: Janik
+Beschreibung:
+Main soll um zwei neue Befehle erweitert werden:
+
+clock: Uhrzeit anzeigen, alle 5 Sekunden aktualisieren.
+
+delete: Eine LED anhand ihrer ID löschen.
+Eingaben validieren und konsolenfreundlich gestalten.
+
+Aufgaben / Breakdown
+Story 4.1 Tasks
+
+spinningWheel-ähnliche Struktur für Zeitberechnung nutzen
+
+Aktuelle LocalDateTime lesen
+
+Stunden/Minuten/Sekunden → LED-Index bestimmen
+
+RGB-Mischung implementieren
+
+LEDs setzen
+
+Unit-Test erstellen (mit fixen Zeiten)
+
+Refactoring bei Bedarf
+
+Story 4.2 Tasks
+
+ApiService um deleteLight(int id) erweitern
+
+ApiServiceImpl: HTTP-DELETE implementieren
+
+Fehlerbehandlung (404/405)
+
+Test mit Mockito erstellen
+
+Hilfsmethode analog zu GET/PUT extrahieren
+
+Story 4.3 Tasks
+
+CLI-Befehl clock implementieren
+
+Loop: Alle 5 Sekunden Zeit neu setzen
+
+Abbruchbedingungen definieren (z. B. Eingabe ‚exit‘ in CLI)
+
+CLI-Befehl delete implementieren
+
+Eingabe ID → deleteLight(id) aufrufen
+
+Ausgaben entsprechend Beispielformat
+
+
+
