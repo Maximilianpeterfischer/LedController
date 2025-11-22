@@ -101,4 +101,10 @@ public class ApiServiceImpl implements ApiService {
                 .put("state", state);
         return sendRequest("/setLight", "PUT", body);
     }
+
+    @Override
+    public void deleteLight(int id) throws IOException {
+        sendRequest("/lights/" + id, "DELETE", null);
+    }
+
 }
