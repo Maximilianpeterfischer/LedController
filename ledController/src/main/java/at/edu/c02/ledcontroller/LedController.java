@@ -27,8 +27,6 @@ public interface LedController {
 
     void spinningLed(String color, int turns, long sleepMillis) throws IOException, InterruptedException;
 
-    void showTime() throws IOException;
-
     void showTime(int hours, int minutes, int seconds) throws IOException;
 
     static String mixColors(boolean hour, boolean minute, boolean second) {
