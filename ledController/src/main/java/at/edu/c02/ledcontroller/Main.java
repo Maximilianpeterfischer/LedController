@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     private static final long SPIN_SLEEP_MILLIS = 200L;
+    private static final long SPINNING_WHEEL_SLEEP_MILLIS = 1000L;
     /**
      * This is the main program entry point. TODO: add new commands when implementing additional features.
      */
@@ -25,6 +26,7 @@ public class Main {
             System.out.println("Enter 'groupstatus' to list all group LEDs");
             System.out.println("Enter 'setled' to set LED color");
             System.out.println("Enter 'spinningled' to start the spinning LED effect");
+            System.out.println("Enter 'spinningwheel' to start the spinning wheel effect");
             System.out.println("Enter 'exit' to exit the program");
             System.out.print("> ");
             input = reader.readLine();
@@ -108,6 +110,26 @@ public class Main {
                     ledController.spinningLed(color, turns, SPIN_SLEEP_MILLIS);
                 } catch (InterruptedException e) {
                     System.out.println("SpinningLed effect interrupted.");
+                    Thread.currentThread().interrupt();
+                }
+            }
+            else if (input.equalsIgnoreCase("spinningwheel")) {
+                System.out.println("How many steps?");
+                System.out.print("> ");
+                String stepsInput = reader.readLine();
+                int steps;
+                try {
+                    steps = Integer.parseInt(stepsInput);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number of steps.");
+                    continue;
+                }
+
+                System.out.println("Starting SpinningWheel effect...");
+                try {
+                    ledController.spinningWheel(steps, SPINNING_WHEEL_SLEEP_MILLIS);
+                } catch (InterruptedException e) {
+                    System.out.println("SpinningWheel effect interrupted.");
                     Thread.currentThread().interrupt();
                 }
             }
