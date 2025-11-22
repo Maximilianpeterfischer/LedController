@@ -2,6 +2,8 @@ package at.edu.c02.ledcontroller;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.time.LocalDateTime;
+
 
 import java.io.IOException;
 
@@ -110,4 +112,55 @@ public class LedControllerImpl implements LedController {
 
         turnOffAllLeds();
     }
+
+    @Override
+    public void showTime() throws IOException {
+        LocalDateTime now = LocalDateTime.now();
+        showTime(now.getHour(), now.getMinute(), now.getSecond());
+    }
+
+    @Override
+    public void showTime(int hours, int minutes, int seconds) throws IOException {
+        JSONArray groupLeds = getGroupLeds();
+        int ledCount = groupLeds.length();
+        if (ledCount == 0) {
+            return;
+        }
+
+        int hourIndex = mapHourToIndex(hours, minutes, ledCount);
+        int minuteIndex = mapToIndex(minutes, 60, ledCount);
+        int secondIndex = mapToIndex(seconds, 60, ledCount);
+
+        for (int i = 0; i < ledCount; i++) {
+            JSONObject led = groupLeds.getJSONObject(i);
+            int id = led.getInt("id");
+
+            boolean isHour   = (i == hourIndex);
+            boolean isMinute = (i == minuteIndex);
+            boolean isSecond = (i == secondIndex);
+
+            String color = LedController.mixColors(isHour, isMinute, isSecond);
+            boolean state = !color.equals("#000000"); // aus, wenn komplett schwarz
+
+            apiService.setLight(id, color, state);
+        }
+    }
+
+    int mapHourToIndex(int hours, int minutes, int ledCount) {
+        int h12 = hours % 12;
+        double totalHours = h12 + (minutes / 60.0);  // Stunden mit Minutenanteil
+        double ratio = totalHours / 12.0;
+        double pos = ratio * ledCount;
+        int index = (int) Math.round(pos) % ledCount;
+        return index;
+    }
+
+    int mapToIndex(int value, int maxExclusive, int ledCount) {
+        double ratio = value / (double) maxExclusive;
+        double pos = ratio * ledCount;
+        int index = (int) Math.round(pos) % ledCount;
+        return index;
+    }
+
+
 }

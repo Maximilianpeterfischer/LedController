@@ -175,4 +175,83 @@ public class LedControllerTest {
         verifyNoMoreInteractions(apiService);
         verifyNoMoreInteractions(sleeper);
     }
+
+    @Test
+    public void showTimeDoesNothingWhenNoGroupLeds() throws Exception {
+        ApiService apiService = mock(ApiService.class);
+        LedControllerImpl controller = new LedControllerImpl(apiService);
+
+        // lights[] leer
+        JSONArray lights = new JSONArray();
+        when(apiService.getLights()).thenReturn(new JSONObject().put("lights", lights));
+
+        controller.showTime(12, 0, 0);
+
+        // Keine LED → kein setLight()
+        verify(apiService, never()).setLight(anyInt(), anyString(), anyBoolean());
+    }
+
+    @Test
+    public void showTimeSetsCorrectColorsForSimpleTime() throws Exception {
+        ApiService apiService = mock(ApiService.class);
+        LedControllerImpl controller = new LedControllerImpl(apiService);
+
+        // Gruppe simulieren: LED IDs 20–27
+        JSONArray lights = new JSONArray();
+        for (int id = 20; id <= 27; id++) {
+            lights.put(new JSONObject()
+                    .put("id", id)
+                    .put("color", "#000")
+                    .put("on", true)
+                    .put("groupByGroup", new JSONObject().put("name", "G")));
+        }
+        when(apiService.getLights()).thenReturn(new JSONObject().put("lights", lights));
+
+        controller.showTime(3, 0, 0);  // 03:00:00
+
+        // Anzahl LEDs
+        int ledCount = lights.length();
+
+        // Indexberechnung folgt deiner Implementierung:
+        int hourIndex   = controller.mapHourToIndex(3, 0, ledCount);   // sollte 3 sein
+        int minuteIndex = controller.mapToIndex(0, 60, ledCount);      // 0
+        int secondIndex = controller.mapToIndex(0, 60, ledCount);      // 0
+
+        int hourId   = 20 + hourIndex;
+        int minuteId = 20 + minuteIndex;
+        int secondId = 20 + secondIndex;
+
+        // Erwartete Farben:
+        // Minuten + Sekunden auf derselben LED → Grün + Blau = Cyan
+        verify(apiService).setLight(hourId, "#ff0000", true);   // rot
+        verify(apiService).setLight(minuteId, "#00ffff", true); // cyan
+
+        // Alle LEDs wurden gesetzt
+        verify(apiService, times(ledCount)).setLight(anyInt(), anyString(), anyBoolean());
+    }
+
+    @Test
+    public void showTimeWhiteWhenAllOnSameLed() throws Exception {
+        ApiService apiService = mock(ApiService.class);
+        LedControllerImpl controller = new LedControllerImpl(apiService);
+
+        // Gruppe simulieren
+        JSONArray lights = new JSONArray();
+        for (int id = 20; id <= 27; id++) {
+            lights.put(new JSONObject()
+                    .put("id", id)
+                    .put("color", "#000")
+                    .put("on", true)
+                    .put("groupByGroup", new JSONObject().put("name", "G")));
+        }
+        when(apiService.getLights()).thenReturn(new JSONObject().put("lights", lights));
+
+        controller.showTime(0, 0, 0);  // H=M=S=0
+
+        // LED 20 ist Index 0
+        verify(apiService).setLight(20, "#ffffff", true);
+        verify(apiService, times(8)).setLight(anyInt(), anyString(), anyBoolean());
+    }
+
+
 }
